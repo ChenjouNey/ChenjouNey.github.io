@@ -1,23 +1,239 @@
-<h1>《考古圖》卷序索引</h1>
-<p><a href='https://chenjouney.github.io/kaogu/v0/p1a'>第1a葉（考古圖記）</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v0/p1b'>第1b葉</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v0/p2a'>第2a葉</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v0/p2b'>第2b葉</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v0/p3a'>第3a葉</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v0/p3b'>第3b葉</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v0/p4a'>第4a葉</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v0/p4b'>第4b葉（陳仁子序）</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v0/p5a'>第5a葉</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v0/p5b'>第5b葉</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v0/p6a'>第6a葉（陳翼子序）</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v0/p6b'>第6b葉</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v0/p7a'>第7a葉</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v0/p7b'>第7b葉</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v0/p8a'>第8a葉</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v0/p8b'>第8b葉（無名氏序）</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v0/p9a'>第9a葉</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v0/p9b'>第9b葉</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v0/p10a'>第10a葉（考古圖所藏姓氏）</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v0/p10b'>第10b葉</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v0/p11a'>第11a葉</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v0/p11b'>第11b葉</a></p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>《考古圖》卷序索引</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'SimSun', '宋体', serif;
+            background-color: #f5f2e9;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.05"><path fill="%238c6239" d="M50,5 C70,5 95,25 95,50 C95,75 70,95 50,95 C30,95 5,75 5,50 C5,25 30,5 50,5 Z"/></svg>');
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            border-bottom: 2px solid #c9a87a;
+            position: relative;
+        }
+        h1 {
+            color: #8c6239;
+            font-size: 32px;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            letter-spacing: 2px;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+            font-style: italic;
+        }
+        .index-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .index-item {
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 15px;
+            transition: all 0.3s ease;
+            border-left: 4px solid #8c6239;
+        }
+        .index-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            background-color: #fefaf3;
+        }
+        .index-item a {
+            display: block;
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            padding: 5px 0;
+            transition: color 0.3s;
+        }
+        .index-item a:hover {
+            color: #8c6239;
+        }
+        .page-description {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        .section-divider {
+            text-align: center;
+            margin: 25px 0;
+            color: #8c6239;
+            font-weight: bold;
+            font-size: 18px;
+            position: relative;
+        }
+        .section-divider:before,
+        .section-divider:after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 35%;
+            height: 1px;
+            background: #c9a87a;
+        }
+        .section-divider:before {
+            left: 0;
+        }
+        .section-divider:after {
+            right: 0;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #c9a87a;
+            color: #666;
+            font-size: 14px;
+        }
+        .quick-nav {
+            background: #f8f4ec;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid #e6dcc9;
+        }
+        .quick-nav a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #8c6239;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .quick-nav a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .index-container {
+                grid-template-columns: 1fr;
+            }
+            .section-divider:before,
+            .section-divider:after {
+                width: 30%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>《考古圖》卷序索引</h1>
+        <p class="subtitle">北宋·吕大臨 撰</p>
+    </header>
+    
+    <div class="quick-nav">
+        <a href="#preface">序言部分</a> | 
+        <a href="#content">正文部分</a> | 
+        <a href="#appendix">附录部分</a>
+    </div>
+    
+    <main>
+        <div class="section-divider" id="preface">序言部分</div>
+        <div class="index-container">
+            <div class="index-item">
+                <a href='https://chenjouney.github.io/kaogu/v0/p1a'>第1a葉（考古圖記）</a>
+                <div class="page-description">考古圖記</div>
+            </div>
+            <div class="index-item">
+                <a href='https://chenjouney.github.io/kaogu/v0/p1b'>第1b葉</a>
+            </div>
+            <div class="index-item">
+                <a href='https://chenjouney.github.io/kaogu/v0/p2a'>第2a葉</a>
+            </div>
+            <div class="index-item">
+                <a href='https://chenjouney.github.io/kaogu/v0/p2b'>第2b葉</a>
+            </div>
+            <div class="index-item">
+                <a href='https://chenjouney.github.io/kaogu/v0/p3a'>第3a葉</a>
+            </div>
+            <div class="index-item">
+                <a href='https://chenjouney.github.io/kaogu/v0/p3b'>第3b葉</a>
+            </div>
+            <div class="index-item">
+                <a href='https://chenjouney.github.io/kaogu/v0/p4a'>第4a葉</a>
+            </div>
+            <div class="index-item">
+                <a href='https://chenjouney.github.io/kaogu/v0/p4b'>第4b葉（陳仁子序）</a>
+                <div class="page-description">陳仁子序</div>
+            </div>
+            <div class="index-item">
+                <a href='https://chenjouney.github.io/kaogu/v0/p5a'>第5a葉</a>
+            </div>
+            <div class="index-item">
+                <a href='https://chenjouney.github.io/kaogu/v0/p5b'>第5b葉</a>
+            </div>
+            <div class="index-item">
+                <a href='https://chenjouney.github.io/kaogu/v0/p6a'>第6a葉（陳翼子序）</a>
+                <div class="page-description">陳翼子序</div>
+            </div>
+            <div class="index-item">
+                <a href='https://chenjouney.github.io/kaogu/v0/p6b'>第6b葉</a>
+            </div>
+            <div class="index-item">
+                <a href='https://chenjouney.github.io/kaogu/v0/p7a'>第7a葉</a>
+            </div>
+            <div class="index-item">
+                <a href='https://chenjouney.github.io/kaogu/v0/p7b'>第7b葉</a>
+            </div>
+            <div class="index-item">
+                <a href='https://chenjouney.github.io/kaogu/v0/p8a'>第8a葉</a>
+            </div>
+            <div class="index-item">
+                <a href='https://chenjouney.github.io/kaogu/v0/p8b'>第8b葉（無名氏序）</a>
+                <div class="page-description">無名氏序</div>
+            </div>
+            <div class="index-item">
+                <a href='https://chenjouney.github.io/kaogu/v0/p9a'>第9a葉</a>
+            </div>
+            <div class="index-item">
+                <a href='https://chenjouney.github.io/kaogu/v0/p9b'>第9b葉</a>
+            </div>
+        </div>
+        
+        <div class="section-divider" id="content">正文部分</div>
+        <div class="index-container">
+            <div class="index-item">
+                <a href='https://chenjouney.github.io/kaogu/v0/p10a'>第10a葉（考古圖所藏姓氏）</a>
+                <div class="page-description">考古圖所藏姓氏</div>
+            </div>
+            <div class="index-item">
+                <a href='https://chenjouney.github.io/kaogu/v0/p10b'>第10b葉</a>
+            </div>
+        </div>
+        
+        <div class="section-divider" id="appendix">附录部分</div>
+        <div class="index-container">
+            <div class="index-item">
+                <a href='https://chenjouney.github.io/kaogu/v0/p11a'>第11a葉</a>
+            </div>
+            <div class="index-item">
+                <a href='https://chenjouney.github.io/kaogu/v0/p11b'>第11b葉</a>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>廼氏珍帚 | ChenjouNey.github.io</p>
+    </footer>
+</body>
+</html>
