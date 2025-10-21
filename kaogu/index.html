@@ -1,21 +1,253 @@
-<h1>明初刻本《考古圖》索引</h1>
-<p><a href='https://chenjouney.github.io/kaogu/v0'>卷序（包含《考古圖所藏姓氏》）</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v1'>卷一</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v2'>卷二</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v3'>卷三</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v4'>卷四</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v5'>卷五</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v6'>卷六</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v7'>卷七</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v8'>卷八</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v9'>卷九</a></p>
-<p><a href='https://chenjouney.github.io/kaogu/v10'>卷十</a></p>
-<p></p>
-<h2>版本</h2>
-<p>1.美藏本（<a href='https://curiosity.lib.harvard.edu/chinese-rare-books/catalog/49-990079148010203941'>哈佛大學燕京圖書館藏</a>）</p>
-<p>2.日藏本（<a href='https://dl.ndl.go.jp/pid/2610560'>日本國立國會圖書館藏</a>）</p>
-<p>3.世學本（<a href='https://commons.wikimedia.org/wiki/File:NCL-05029_%E8%80%83%E5%8F%A4%E5%9C%96.pdf'>臺灣省圖書館藏</a>）</p>
-<p>4.四卷本（<a href='http://read.nlc.cn/allSearch/searchDetail?searchType=1002&showType=1&indexName=data_892&fid=411999013492'>中國國家圖書館藏</a>）</p>
-<p>5.北圖本（<a href='http://read.nlc.cn/allSearch/searchDetail?searchType=1002&showType=1&indexName=data_892&fid=1060'>中國國家圖書館藏</a>）</p>
-<p>6.存目本（華東師范大學圖書館藏，載《四庫存目叢書》子部第77册，齊魯書社，1995年）</p>
-<p>7.一卷本（<a href='http://read.nlc.cn/allSearch/searchDetail?searchType=1002&showType=1&indexName=data_892&fid=411999012863'>中國國家圖書館藏</a>）</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>明初刻本《考古圖》索引</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'SimSun', '宋体', serif;
+            background-color: #f5f2e9;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.05"><path fill="%238c6239" d="M50,5 C70,5 95,25 95,50 C95,75 70,95 50,95 C30,95 5,75 5,50 C5,25 30,5 50,5 Z"/></svg>');
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            border-bottom: 2px solid #c9a87a;
+            position: relative;
+        }
+        h1 {
+            color: #8c6239;
+            font-size: 32px;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            letter-spacing: 2px;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+            font-style: italic;
+        }
+        .section-container {
+            margin-bottom: 40px;
+        }
+        .section-title {
+            text-align: center;
+            margin: 25px 0;
+            color: #8c6239;
+            font-weight: bold;
+            font-size: 22px;
+            position: relative;
+            padding: 0 20px;
+        }
+        .section-title:before,
+        .section-title:after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background: #c9a87a;
+        }
+        .section-title:before {
+            left: 0;
+        }
+        .section-title:after {
+            right: 0;
+        }
+        .index-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .index-item {
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 15px;
+            transition: all 0.3s ease;
+            border-left: 4px solid #8c6239;
+        }
+        .index-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            background-color: #fefaf3;
+        }
+        .index-item a {
+            display: block;
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            padding: 5px 0;
+            transition: color 0.3s;
+        }
+        .index-item a:hover {
+            color: #8c6239;
+        }
+        .version-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .version-item {
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 15px;
+            transition: all 0.3s ease;
+            border-left: 4px solid #c9a87a;
+        }
+        .version-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            background-color: #fefaf3;
+        }
+        .version-item p {
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        .version-item a {
+            color: #8c6239;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .version-item a:hover {
+            color: #6d4a2a;
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #c9a87a;
+            color: #666;
+            font-size: 14px;
+        }
+        .quick-nav {
+            background: #f8f4ec;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid #e6dcc9;
+        }
+        .quick-nav a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #8c6239;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .quick-nav a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .index-container,
+            .version-container {
+                grid-template-columns: 1fr;
+            }
+            .section-title:before,
+            .section-title:after {
+                width: 25%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>明初刻本《考古圖》索引</h1>
+        <p class="subtitle">北宋·吕大臨 撰</p>
+    </header>
+    
+    <div class="quick-nav">
+        <a href="#volumes">卷次索引</a> | 
+        <a href="#versions">版本信息</a>
+    </div>
+    
+    <main>
+        <div class="section-container">
+            <div class="section-title" id="volumes">卷次索引</div>
+            <div class="index-container">
+                <div class="index-item">
+                    <a href='https://chenjouney.github.io/kaogu/v0'>卷序（包含《考古圖所藏姓氏》）</a>
+                    <div class="page-description">卷序及所藏姓氏</div>
+                </div>
+                <div class="index-item">
+                    <a href='https://chenjouney.github.io/kaogu/v1'>卷一</a>
+                </div>
+                <div class="index-item">
+                    <a href='https://chenjouney.github.io/kaogu/v2'>卷二</a>
+                </div>
+                <div class="index-item">
+                    <a href='https://chenjouney.github.io/kaogu/v3'>卷三</a>
+                </div>
+                <div class="index-item">
+                    <a href='https://chenjouney.github.io/kaogu/v4'>卷四</a>
+                </div>
+                <div class="index-item">
+                    <a href='https://chenjouney.github.io/kaogu/v5'>卷五</a>
+                </div>
+                <div class="index-item">
+                    <a href='https://chenjouney.github.io/kaogu/v6'>卷六</a>
+                </div>
+                <div class="index-item">
+                    <a href='https://chenjouney.github.io/kaogu/v7'>卷七</a>
+                </div>
+                <div class="index-item">
+                    <a href='https://chenjouney.github.io/kaogu/v8'>卷八</a>
+                </div>
+                <div class="index-item">
+                    <a href='https://chenjouney.github.io/kaogu/v9'>卷九</a>
+                </div>
+                <div class="index-item">
+                    <a href='https://chenjouney.github.io/kaogu/v10'>卷十</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-container">
+            <div class="section-title" id="versions">版本信息</div>
+            <div class="version-container">
+                <div class="version-item">
+                    <p>1. 美藏本（<a href='https://curiosity.lib.harvard.edu/chinese-rare-books/catalog/49-990079148010203941'>哈佛大學燕京圖書館藏</a>）</p>
+                </div>
+                <div class="version-item">
+                    <p>2. 日藏本（<a href='https://dl.ndl.go.jp/pid/2610560'>日本國立國會圖書館藏</a>）</p>
+                </div>
+                <div class="version-item">
+                    <p>3. 世學本（<a href='https://commons.wikimedia.org/wiki/File:NCL-05029_%E8%80%83%E5%8F%A4%E5%9C%96.pdf'>臺灣省圖書館藏</a>）</p>
+                </div>
+                <div class="version-item">
+                    <p>4. 四卷本（<a href='http://read.nlc.cn/allSearch/searchDetail?searchType=1002&showType=1&indexName=data_892&fid=411999013492'>中國國家圖書館藏</a>）</p>
+                </div>
+                <div class="version-item">
+                    <p>5. 北圖本（<a href='http://read.nlc.cn/allSearch/searchDetail?searchType=1002&showType=1&indexName=data_892&fid=1060'>中國國家圖書館藏</a>）</p>
+                </div>
+                <div class="version-item">
+                    <p>6. 存目本（華東師范大學圖書館藏，載《四庫存目叢書》子部第77册，齊魯書社，1995年）</p>
+                </div>
+                <div class="version-item">
+                    <p>7. 一卷本（<a href='http://read.nlc.cn/allSearch/searchDetail?searchType=1002&showType=1&indexName=data_892&fid=411999012863'>中國國家圖書館藏</a>）</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>廼氏珍帚 | ChenjouNey.github.io</p>
+    </footer>
+</body>
+</html>
