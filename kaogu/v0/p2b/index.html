@@ -1,1 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>明初刻本《考古圖》對照 - 圖片展示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'SimSun', '宋体', serif;
+            background-color: #f5f2e9;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #c9a87a;
+        }
+        h1 {
+            color: #8c6239;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+        }
+        .image-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        .image-item {
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .image-item:hover {
+            transform: translateY(-5px);
+        }
+        .image-item img {
+            width: 500px;
+            height: auto;
+            display: block;
+            border: 1px solid #eee;
+        }
+        .image-caption {
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            color: #555;
+            font-weight: bold;
+        }
+        .missing-item {
+            background: #f8f8f8;
+            border: 1px dashed #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            margin: 10px 0;
+            color: #888;
+        }
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding: 20px 0;
+        }
+        .pagination a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #8c6239;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .pagination a:hover {
+            background-color: #6d4a2a;
+        }
 
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #c9a87a;
+            color: #666;
+            font-size: 14px;
+        }
+        @media (max-width: 768px) {
+            .image-item img {
+                width: 100%;
+                max-width: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>明初刻本《考古圖》對照</h1>
+        <p class="subtitle">不同版本《考古圖》圖片展示</p>
+    </header>
+    
+    <main>
+        <div class="image-gallery">
+            <div class="image-item">
+                <img src="/img/0-2b-1.png" alt="美藏本">
+                <div class="image-caption">美藏本</div>
+            </div>
+            <div class="image-item">
+                <img src="/img/0-2b-2.png" alt="日藏本">
+                <div class="image-caption">日藏本</div>
+            </div>
+            <div class="image-item">
+                <img src="/img/0-2b-3.png" alt="世學本">
+                <div class="image-caption">世學本</div>
+            </div>
+            <div class="image-item">
+                <img src="/img/0-2b-4.png" alt="四卷本">
+                <div class="image-caption">四卷本</div>
+            </div>
+            <div class="image-item">
+                <img src="/img/0-2b-5.png" alt="北圖本">
+                <div class="image-caption">北圖本</div>
+            </div>
+            <div class="image-item">
+                <img src="/img/0-2b-6.png" alt="存目本">
+                <div class="image-caption">存目本</div>
+            </div>
+        </div>
+        
+        <div class="missing-item">
+            （缺）一卷本
+        </div>
+        
+        <div class="pagination">
+            <a href="https://chenjouney.github.io/kaogu/v0/p2a/" class="prev-page">上一页</a>
+            <a href="https://chenjouney.github.io/kaogu/v0/p3a/" class="next-page">下一页</a>
+        </div>
+    </main>
+    
+    <footer>
+        <p>廼氏珍帚 | ChenjouNey.github.io</p>
+    </footer>
+    
+    <script>
+        // 圖片加載錯誤處理
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.addEventListener('error', function() {
+                    this.alt = '圖片加載失敗: ' + this.alt;
+                    this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPuWbvueJh+WKoOi9veS4rS4uLjwvdGV4dD48L3N2Zz4=';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
