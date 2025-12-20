@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>簡帛集成 - 上博四《相邦之道》</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: '等线', 'DengXian', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            min-height: 100vh;
+            padding: 80px 0 60px 0;
+            color: #333;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            grid-template-areas: 
+                "header"
+                "main"
+                "references";
+            gap: 20px;
+        }
+        
+        header {
+            grid-area: header;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            z-index: 1000;
+            font-family: '黑体', 'Heiti SC', sans-serif;
+            letter-spacing: 2px;
+        }
+        
+        .container {
+            grid-area: main;
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px;
+            gap: 30px;
+        }
+        
+        /* 参考文献区域样式 */
+        .references-section {
+            grid-area: references;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px 30px;
+            width: 100%;
+        }
+        
+        .references-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            line-height: 1.6;
+        }
+        
+        .references-title {
+            font-family: '黑体', 'Heiti SC', sans-serif;
+            font-size: 22px;
+            color: #8B4513;
+            border-bottom: 1px solid #E8D5C4;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .references-list {
+            list-style-type: decimal;
+            padding-left: 20px;
+        }
+        
+        .references-list li {
+            margin-bottom: 15px;
+            padding-left: 10px;
+            text-align: justify;
+        }
+        
+        .references-list li:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* 左侧文字栏优化 */
+        .text-box {
+            flex: 2;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            line-height: 1.8;
+            font-size: 18px;
+            /* min-height: 500px; */ /* 注释掉或删除这一行 */
+            color: #222;
+            text-align: justify;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.03), 0 4px 15px rgba(0, 0, 0, 0.1);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            letter-spacing: 0.02em;
+            overflow: hidden;
+        }
+        
+
+        /* 选项卡样式 */
+        .tab-nav {
+            display: flex;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid #E8D5C4;
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+        }
+        
+        .tab-button {
+            flex: 1;
+            padding: 12px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            color: #8B4513;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab-button:hover {
+            background-color: rgba(255, 126, 95, 0.1);
+        }
+        
+        .tab-button.active {
+            background-color: rgba(255, 126, 95, 0.2);
+            color: #8B4513;
+            border-bottom: 3px solid #ff7e5f;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 35px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* 标题样式优化 */
+        .text-box h2 {
+            font-family: '黑体', 'Heiti SC', sans-serif;
+            font-size: 22px;
+            margin: 0 0 1.5em 0;
+            color: #8B4513;
+            border-bottom: 1px solid #E8D5C4;
+            padding-bottom: 8px;
+            text-indent: 0;
+        }
+        
+        /* 段落样式优化 - 统一所有文本样式 */
+        .text-box p {
+            margin-bottom: 1.8em;
+            text-indent: 2em;
+            word-wrap: break-word;
+            hyphens: auto;
+            /* 统一字体和颜色 */
+            font-family: '等线', 'DengXian', sans-serif;
+            color: #333;
+            font-weight: 500;
+            /* 移除特殊背景和边框 */
+            background-color: transparent;
+            padding: 0;
+            border-left: none;
+            border-radius: 0;
+        }
+        
+        /* 确保最后一个段落没有底部边距 */
+        .text-box p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* 强调文本样式 */
+        .text-box strong {
+            color: #8B4513;
+            font-weight: bold;
+        }
+        
+        /* 可点击的数字样式 */
+        .clickable-number {
+            color: #ff7e5f;
+            cursor: pointer;
+            text-decoration: underline;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            padding: 0 2px;
+            border-radius: 3px;
+        }
+        
+        .clickable-number:hover {
+            background-color: rgba(255, 126, 95, 0.2);
+            transform: scale(1.1);
+        }
+        
+        .image-area {
+            flex: 1.5;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: sticky; /* 新增：启用粘性定位 */
+            top: 80px; /* 新增：距离视口顶部80px时触发粘性效果 */
+            align-self: flex-start; /* 新增：确保正确对齐 */
+            max-height: 100vh; /* 新增：限制最大高度 */
+        }
+        
+        .image-display {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 450px;
+            overflow: hidden;
+            position: relative;
+            /* 添加相对定位作为图片拖拽的参考容器 */
+        }
+        
+        .image-display img {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            cursor: zoom-in;
+            /* 添加拖拽所需的定位属性 */
+            position: relative;
+            left: 0;
+            top: 0;
+        }
+        
+        .navigation {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .page-controls, .zoom-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-btn, .zoom-btn, .jump-btn {
+            background-color: #ff7e5f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: '等线', 'DengXian', sans-serif;
+        }
+        
+        .nav-btn:hover, .zoom-btn:hover, .jump-btn:hover {
+            background-color: #feb47b;
+        }
+        
+        .nav-btn:disabled, .zoom-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .page-info, .zoom-info {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            min-width: 80px;
+            text-align: center;
+            font-family: '等线', 'DengXian', sans-serif;
+        }
+        
+        .page-input {
+            width: 60px;
+            padding: 5px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 16px;
+            font-family: '等线', 'DengXian', sans-serif;
+        }
+        
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background-color: rgba(255, 126, 95, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            z-index: 1000;
+            font-family: '黑体', 'Heiti SC', sans-serif;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            body {
+                padding: 80px 0 80px 0;
+                grid-template-rows: auto 1fr auto;
+            }
+            
+            .container {
+                flex-direction: column;
+                padding: 15px;
+                gap: 20px;
+            }
+            
+            .text-box {
+                flex: none;
+                width: 100%;
+                min-height: 300px;
+                font-size: 16px;
+                line-height: 1.75;
+                text-align: left;
+            }
+            
+            .tab-nav {
+                flex-direction: column;
+            }
+            
+            .tab-button {
+                padding: 10px;
+                font-size: 16px;
+                border-bottom: 1px solid #E8D5C4;
+                border-right: none;
+            }
+            
+            .tab-content {
+                padding: 20px 15px;
+            }
+            
+            .text-box p {
+                text-indent: 2em;
+                margin-bottom: 1.6em;
+            }
+            
+            .text-box h2 {
+                font-size: 20px;
+            }
+            
+            .image-display img {
+                max-height: 250px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .page-controls, .zoom-controls {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .references-section {
+                padding: 0 15px 15px;
+            }
+            
+            .references-container {
+                padding: 15px;
+            }
+            
+            .references-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>上博四《相邦之道》</header>
+    
+    <div class="container">
+        <div class="text-box">
+            <!-- 选项卡导航 -->
+            <div class="tab-nav">
+                <button class="tab-button active" data-tab="tab1">嚴式</button>
+                <button class="tab-button" data-tab="tab2">嚴寛式</button>
+                <button class="tab-button" data-tab="tab3">寛式</button>
+            </div>
+            
+            <!-- 选项卡内容 -->
+            <div id="tab1" class="tab-content active">
+                <h2>【第一章】</h2>
+                <p>先丌欲備丌𰐘牧丌𫺉⿱寈口㠯寺寺=出古=出事=出政=母忘所𫩞事〼<span class="clickable-number" data-image="1">【1】</span></p>
+                <h2>【第二章】</h2>
+                <p>〼□⿺辶⬚□⿺辶⬚□人可胃⿱相又邦矣公曰敢昏民事孔〼<span class="clickable-number" data-image="2">【2】</span></p>
+                <h2>【第三章】</h2>
+                <p>〼實官蒼百攻𰒣於事㠯實𢊾⿱宀車⿱石⿰人从□𰒣於四枳之褻㠯備軍𲅭〼<span class="clickable-number" data-image="3">【3】</span></p>
+                <h2>【第四章】</h2>
+                <p>〼□孔=退告子⿱𮲾貝曰𫊟見於君不昏又邦之道而昏⿱相又邦之道不亦⿱𮲾土唬子⿱𮲾貝曰𫊟子之𣌭也可女孔=曰女𧧍〼<span class="clickable-number" data-image="4">【4】</span></p>
+            </div>
+            
+            <div id="tab2" class="tab-content">
+                <h2>【第一章】</h2>
+                <p>先丌（其）欲，備（服）丌（其）𰐘（强），牧丌（其）𫺉（倦）。⿱寈口（静）㠯（以）寺（待）寺=（時。時）出古=（故，故）出事=（事，事）出政=（政。政）母（毋）忘所𫩞（始），事〼<span class="clickable-number" data-image="1">【1】</span></p>
+                <h2>【第二章】</h2>
+                <p>“〼□⿺辶⬚□⿺辶⬚□人，可胃（謂）⿱相又（相）邦矣。”公曰：“敢昏（問）民事。”孔（孔子）〼<span class="clickable-number" data-image="2">【2】</span></p>
+                <h2>【第三章】</h2>
+                <p>〼實官蒼（倉）。百攻（工）𰒣（勸）於事，㠯（以）實𢊾（府）⿱宀車（庫）。⿱石⿰人从（庶）□𰒣（勸）於四枳（肢）之褻（藝），㠯（以）備軍𲅭（旅）。〼<span class="clickable-number" data-image="3">【3】</span></p>
+                <h2>【第四章】</h2>
+                <p>〼□。孔=（孔子）退，告子⿱𮲾貝（貢）曰：“𫊟（吾）見於君，不昏（問）又（有）邦之道，而昏（問）⿱相又（相）邦之道，不亦⿱𮲾土（謙）唬（乎）？”子⿱𮲾貝（貢）曰：“𫊟（吾）子之𣌭（對）也可（何）女（如）？”孔=（孔子）曰：“女（如）𧧍（訊）。”<span class="clickable-number" data-image="4">【4】</span></p>
+            </div>
+            
+            <div id="tab3" class="tab-content">
+                <h2>【第一章】</h2>
+                <p>先其欲，服其强，牧其倦。静以待時。時出故，故出事，事出政。政毋忘所始，事〼<span class="clickable-number" data-image="1">【1】</span></p>
+                <h2>【第二章】</h2>
+                <p>“〼□□□□□人，可謂相邦矣。”公曰：“敢問民事。”孔子〼<span class="clickable-number" data-image="2">【2】</span></p>
+                <h2>【第三章】</h2>
+                <p>〼實官倉。百工勸於事，以實府庫。庶□勸於四肢之藝，以備軍旅。〼<span class="clickable-number" data-image="3">【3】</span></p>
+                <h2>【第四章】</h2>
+                <p>〼□。孔子退，告子貢曰：“吾見於君，不問有邦之道，而問相邦之道，不亦謙乎？”子貢曰：“吾子之對也何如？”孔=（孔子）曰：“如訊。”<span class="clickable-number" data-image="4">【4】</span></p>
+            </div>
+        </div>
+        
+        <div class="image-area">
+            <div class="image-display">
+                <img id="current-image" src="image/1.png" alt="圖片1">
+            </div>
+            
+            <div class="navigation">
+                <div class="page-controls">
+                    <button class="nav-btn" id="prev-btn">上頁</button>
+                    <span class="page-info" id="page-info">1/4</span>
+                    <button class="nav-btn" id="next-btn">下頁</button>
+                    <input type="number" class="page-input" id="page-input" min="1" max="4" value="1">
+                    <button class="jump-btn" id="jump-btn">跳轉</button>
+                </div>
+                
+                <div class="zoom-controls">
+                    <button class="zoom-btn" id="zoom-out-btn">縮小</button>
+                    <span class="zoom-info" id="zoom-info">100%</span>
+                    <button class="zoom-btn" id="zoom-in-btn">放大</button>
+                    <button class="zoom-btn" id="reset-zoom-btn">重置</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 参考文献区域 -->
+    <section class="references-section">
+        <div class="references-container">
+            <h2 class="references-title">参考文献</h2>
+            <ol class="references-list">
+                <li>馬承源主編：《上海博物館藏戰國楚竹书（四）》，上海古籍出版社，2005年，轉引自古音小鏡“楚簡字形查詢”。</li>
+                <li>裘錫圭：《〈上海博物館戰國楚竹書（四）·相邦之道〉釋文注釋》，《裘錫圭學術文集》簡牘帛書卷，復旦大學出版社，2017年，第493-495頁。</li>
+                <li>裘錫圭：《上博簡〈相邦之道〉一號簡考釋》，《裘錫圭學術文集》簡牘帛書卷，復旦大學出版社，2017年，第507-511頁。</li>
+                <li>⿱𮲾土，原釋“⿱䚿土”，舊以爲从欠聲，不可信，“欠”爲“𮲾”省得聲。審左側頗似“章”，因改。關于“欠”字，參見布之道（蕭禕科）：《説字小記（一）》，復旦大學出土文獻與古文字研究中心，2025年4月30日。</li>
+            </ol>
+        </div>
+    </section>
+
+    <script>
+        // 选项卡功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // 移除所有按钮的激活状态
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    // 隐藏所有内容
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // 激活当前按钮
+                    button.classList.add('active');
+                    
+                    // 显示对应内容
+                    const tabId = button.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // 添加点击数字跳转图片的功能
+            setupClickableNumbers();
+        });
+        
+        // 图片数据
+        const totalImages = 4;
+        let currentImage = 1;
+        let scale = 1;
+        const minScale = 0.5;
+        const maxScale = 3;
+        const scaleStep = 0.1;
+        
+        // 获取DOM元素
+        const currentImageElement = document.getElementById('current-image');
+        const pageInfoElement = document.getElementById('page-info');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const zoomInBtn = document.getElementById('zoom-in-btn');
+        const zoomOutBtn = document.getElementById('zoom-out-btn');
+        const resetZoomBtn = document.getElementById('reset-zoom-btn');
+        const zoomInfoElement = document.getElementById('zoom-info');
+        const pageInput = document.getElementById('page-input');
+        const jumpBtn = document.getElementById('jump-btn');
+        
+        // 拖拽相关变量
+        let isDragging = false;
+        let startX, startY, initialLeft, initialTop;
+        let currentLeft = 0, currentTop = 0;
+        
+        // 设置可点击数字功能
+        function setupClickableNumbers() {
+            const clickableNumbers = document.querySelectorAll('.clickable-number');
+            
+            clickableNumbers.forEach(number => {
+                number.addEventListener('click', function() {
+                    const imageIndex = parseInt(this.getAttribute('data-image'));
+                    if (imageIndex >= 1 && imageIndex <= totalImages) {
+                        currentImage = imageIndex;
+                        updateImage();
+                        
+                        // 添加视觉反馈
+                        this.style.backgroundColor = 'rgba(255, 126, 95, 0.3)';
+                        setTimeout(() => {
+                            this.style.backgroundColor = '';
+                        }, 500);
+                    } else {
+                        alert('该图片编号不存在');
+                    }
+                });
+            });
+        }
+        
+        // 更新图片和页面信息
+        function updateImage() {
+            currentImageElement.src = `image/${currentImage}.png`;
+            currentImageElement.alt = `图片${currentImage}`;
+            pageInfoElement.textContent = `${currentImage}/${totalImages}`;
+            pageInput.value = currentImage;
+            
+            // 更新按钮状态
+            prevBtn.disabled = currentImage === 1;
+            nextBtn.disabled = currentImage === totalImages;
+            
+            // 更新输入框的最大值
+            pageInput.setAttribute('max', totalImages);
+            
+            // 重置图片位置和缩放
+            resetImagePosition();
+        }
+        
+        // 重置图片位置
+        function resetImagePosition() {
+            currentLeft = 0;
+            currentTop = 0;
+            currentImageElement.style.left = '0px';
+            currentImageElement.style.top = '0px';
+            scale = 1;
+            updateZoom();
+        }
+        
+        // 更新缩放
+        function updateZoom() {
+            // 限制缩放范围
+            scale = Math.min(Math.max(scale, minScale), maxScale);
+            
+            // 应用缩放
+            currentImageElement.style.transform = `scale(${scale})`;
+            
+            // 更新缩放信息
+            zoomInfoElement.textContent = `${Math.round(scale * 100)}%`;
+            
+            // 更新按钮状态
+            zoomOutBtn.disabled = scale <= minScale;
+            zoomInBtn.disabled = scale >= maxScale;
+            
+            // 更改光标样式
+            currentImageElement.style.cursor = scale > 1 ? 'grab' : 'zoom-in';
+        }
+        
+        // 放大图片
+        function zoomIn() {
+            scale += scaleStep;
+            updateZoom();
+        }
+        
+        // 缩小图片
+        function zoomOut() {
+            scale -= scaleStep;
+            updateZoom();
+        }
+        
+        // 重置缩放
+        function resetZoom() {
+            scale = 1;
+            updateZoom();
+            resetImagePosition();
+        }
+        
+        // 跳转到指定页面
+        function jumpToPage() {
+            let targetPage = parseInt(pageInput.value);
+            
+            // 验证输入是否有效
+            if (isNaN(targetPage) || targetPage < 1 || targetPage > totalImages) {
+                alert(`请输入有效的页码 (1-${totalImages})`);
+                pageInput.value = currentImage;
+                return;
+            }
+            
+            currentImage = targetPage;
+            updateImage();
+        }
+        
+        // 鼠标按下事件 - 开始拖拽
+        currentImageElement.addEventListener('mousedown', (event) => {
+            if (scale <= 1) return; // 只有在缩放后才允许拖拽
+            
+            event.preventDefault();
+            isDragging = true;
+            startX = event.clientX;
+            startY = event.clientY;
+            initialLeft = currentLeft;
+            initialTop = currentTop;
+            currentImageElement.style.cursor = 'grabbing';
+        });
+        
+        // 鼠标移动事件 - 拖拽图片
+        document.addEventListener('mousemove', (event) => {
+            if (!isDragging) return;
+            
+            event.preventDefault();
+            
+            const deltaX = event.clientX - startX;
+            const deltaY = event.clientY - startY;
+            
+            // 计算新的位置
+            currentLeft = initialLeft + deltaX;
+            currentTop = initialTop + deltaY;
+            
+            // 应用新的位置
+            currentImageElement.style.left = `${currentLeft}px`;
+            currentImageElement.style.top = `${currentTop}px`;
+        });
+        
+        // 鼠标释放事件 - 结束拖拽
+        document.addEventListener('mouseup', () => {
+            if (!isDragging) return;
+            
+            isDragging = false;
+            currentImageElement.style.cursor = scale > 1 ? 'grab' : 'zoom-in';
+        });
+        
+        // 鼠标滚轮事件
+        currentImageElement.addEventListener('wheel', (event) => {
+            event.preventDefault();
+            
+            if (event.deltaY < 0) {
+                // 向上滚动，放大图片
+                zoomIn();
+            } else {
+                // 向下滚动，缩小图片
+                zoomOut();
+            }
+        });
+        
+        // 上一页按钮点击事件
+        prevBtn.addEventListener('click', () => {
+            if (currentImage > 1) {
+                currentImage--;
+                updateImage();
+            }
+        });
+        
+        // 下一页按钮点击事件
+        nextBtn.addEventListener('click', () => {
+            if (currentImage < totalImages) {
+                currentImage++;
+                updateImage();
+            }
+        });
+        
+        // 放大按钮点击事件
+        zoomInBtn.addEventListener('click', zoomIn);
+        
+        // 缩小按钮点击事件
+        zoomOutBtn.addEventListener('click', zoomOut);
+        
+        // 重置缩放按钮点击事件
+        resetZoomBtn.addEventListener('click', resetZoom);
+        
+        // 跳转按钮点击事件
+        jumpBtn.addEventListener('click', jumpToPage);
+        
+        // 输入框回车键事件
+        pageInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                jumpToPage();
+            }
+        });
+        
+        // 输入框失去焦点事件
+        pageInput.addEventListener('blur', () => {
+            // 当输入框失去焦点时，如果值无效，则恢复为当前页码
+            let targetPage = parseInt(pageInput.value);
+            if (isNaN(targetPage) || targetPage < 1 || targetPage > totalImages) {
+                pageInput.value = currentImage;
+            }
+        });
+        
+        // 初始化页面
+        updateImage();
+    </script>
+</body>
+</html>

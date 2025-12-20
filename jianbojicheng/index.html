@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>簡帛索引</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: '等线', 'DengXian', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background-color: #8B4513;
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .category {
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            font-size: 24px;
+            color: #8B4513;
+            border-left: 5px solid #ff7e5f;
+            padding-left: 15px;
+            margin: 25px 0 15px 0;
+            font-weight: bold;
+        }
+        
+        .item-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        
+        .item {
+            background-color: rgba(255, 126, 95, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s ease;
+            border-left: 3px solid #ff7e5f;
+        }
+        
+        .item:hover {
+            background-color: rgba(255, 126, 95, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .item a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+        
+        .item a:hover {
+            color: #8B4513;
+        }
+        
+        .description {
+            font-size: 14px;
+            color: #666;
+            margin-top: 8px;
+            line-height: 1.4;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #E8D5C4;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .item-list {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>簡帛索引</h1>
+            <div class="subtitle">珍帚氏讀無用書齋</div>
+        </header>
+
+            <div class="category">
+                <h2>上博二</h2>
+                <div class="item-list">
+                    <div class="item">
+                        <a href="/shangbo/2/rongchengshi">容成氏</a>
+                        <div class="description">儒家</div>
+                    </div>
+                </div>
+            </div>
+            
+ 
+            <div class="category">
+                <h2>上博四</h2>
+                <div class="item-list">
+                    <div class="item">
+                        <a href="/shangbo/4/xiangbangzhidao">相邦之道</a>
+                        <div class="description">儒家</div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+
+    <script>
+        // 简单的交互功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const items = document.querySelectorAll('.item a');
+            
+            items.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('您点击了: ' + this.textContent + '\n实际使用中这里将跳转到对应页面');
+                    // 实际使用时，这里应该是页面跳转代码
+                    // window.location.href = '您的链接';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
