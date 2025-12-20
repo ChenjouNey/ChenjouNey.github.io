@@ -157,21 +157,6 @@
         </div>
 
     </div>
-
-    <script>
-        // 简单的交互功能
-        document.addEventListener('DOMContentLoaded', function() {
-            const items = document.querySelectorAll('.item a');
-            
-            items.forEach(item => {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    alert('您点击了: ' + this.textContent + '\n实际使用中这里将跳转到对应页面');
-                    // 实际使用时，这里应该是页面跳转代码
-                    // window.location.href = '您的链接';
-                });
-            });
-        });
-    </script>
 </body>
+
 </html>
